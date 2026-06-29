@@ -1,0 +1,21 @@
+{
+  "businessName": "Bella Hair Studio",
+  "tagline": "Modern cuts, color & styling — crafted just for you",
+  "intro": "A boutique salon where every visit is relaxed, personal, and finished with care. Book in for a fresh cut, a bold new color, or styling for your big day.",
+  "phone": "+1 (555) 123-4567",
+  "email": "hello@bellahair.example",
+  "address": "123 High Street, Your Town, ST 12345",
+  "mapsUrl": "https://maps.google.com/?q=123+High+Street",
+  "bookingUrl": "",
+  "instagram": "https://instagram.com/",
+  "facebook": "https://facebook.com/",
+  "hours": [
+    { "day": "Monday", "time": "Closed" },
+    { "day": "Tuesday", "time": "9:00 – 18:00" },
+    { "day": "Wednesday", "time": "9:00 – 18:00" },
+    { "day": "Thursday", "time": "9:00 – 20:00" },
+    { "day": "Friday", "time": "9:00 – 20:00" },
+    { "day": "Saturday", "time": "8:00 – 16:00" },
+    { "day": "Sunday", "time": "Closed" }
+  ]
+}

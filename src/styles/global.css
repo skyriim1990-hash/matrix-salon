@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* ---- Brand theme -------------------------------------------------------
+   Change these colors to match your salon's branding. They are used
+   throughout the site via classes like text-brand, bg-brand, etc.        */
+@theme {
+  --color-brand: #b08968;
+  --color-brand-dark: #7f5539;
+  --color-brand-light: #e6ccb2;
+  --color-cream: #fdf8f3;
+  --color-ink: #2c2420;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}

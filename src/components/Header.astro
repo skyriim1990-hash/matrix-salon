@@ -1,0 +1,70 @@
+---
+import site from '../data/site.json';
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+
+const bookHref = site.bookingUrl && site.bookingUrl.length > 0 ? site.bookingUrl : '/contact';
+---
+
+<header class="sticky top-0 z-40 bg-cream/90 backdrop-blur border-b border-brand-light">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <a href="/" class="text-2xl text-brand-dark tracking-wide">{site.businessName}</a>
+
+    <button
+      id="menu-toggle"
+      class="sm:hidden p-2 text-brand-dark"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+
+    <div class="hidden sm:flex items-center gap-7">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          class={`text-sm font-medium transition-colors hover:text-brand ${
+            isActive(l.href) ? 'text-brand' : 'text-ink/70'
+          }`}
+        >
+          {l.label}
+        </a>
+      ))}
+      <a
+        href={bookHref}
+        class="rounded-full bg-brand-dark px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-brand"
+      >
+        Book now
+      </a>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" class="hidden sm:hidden border-t border-brand-light bg-cream px-4 pb-4">
+    {links.map((l) => (
+      <a href={l.href} class="block py-2 text-ink/80 hover:text-brand">{l.label}</a>
+    ))}
+    <a href={bookHref} class="mt-2 block rounded-full bg-brand-dark px-5 py-2 text-center text-white">
+      Book now
+    </a>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden');
+    toggle.setAttribute('aria-expanded', String(!open));
+  });
+</script>

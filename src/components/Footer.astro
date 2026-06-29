@@ -1,0 +1,44 @@
+---
+import site from '../data/site.json';
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-brand-dark text-cream/90">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid gap-8 sm:grid-cols-3">
+    <div>
+      <h3 class="text-xl text-white mb-2">{site.businessName}</h3>
+      <p class="text-sm text-cream/70">{site.tagline}</p>
+    </div>
+
+    <div>
+      <h4 class="text-white mb-3 text-lg">Visit us</h4>
+      <p class="text-sm leading-relaxed">
+        <a href={site.mapsUrl} class="hover:text-white">{site.address}</a><br />
+        <a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="hover:text-white">{site.phone}</a><br />
+        <a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a>
+      </p>
+    </div>
+
+    <div>
+      <h4 class="text-white mb-3 text-lg">Opening hours</h4>
+      <ul class="text-sm space-y-1">
+        {site.hours.map((h) => (
+          <li class="flex justify-between gap-4">
+            <span>{h.day}</span>
+            <span class="text-cream/70">{h.time}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/60">
+      <p>© {year} {site.businessName}. All rights reserved.</p>
+      <div class="flex gap-4">
+        {site.instagram && <a href={site.instagram} class="hover:text-white">Instagram</a>}
+        {site.facebook && <a href={site.facebook} class="hover:text-white">Facebook</a>}
+      </div>
+    </div>
+  </div>
+</footer>
