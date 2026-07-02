@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ui, business, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+
+// Masonry-style mix using the placeholder set (replace with real photos later).
+const shots = [
+  'work-1', 'work-2', 'feature-2', 'work-3', 'work-4', 'feature-4',
+  'work-5', 'work-6', 'work-7', 'invite-1', 'work-8', 'invite-2',
+];
+---
+
+<Layout lang={lang} title={`${t.nav.gallery} — ${business.name}`} description={t.meta.description}>
+  <section class="pt-36 pb-24 sm:pb-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-2xl mx-auto reveal">
+        <span class="rule mb-6"></span>
+        <p class="eyebrow">{t.gallery.eyebrow}</p>
+        <h1 class="mt-4 text-5xl sm:text-6xl text-cream">{t.gallery.title}</h1>
+        <p class="mt-5 text-sand/75">{t.gallery.text}</p>
+      </div>
+
+      <div class="mt-14 columns-2 md:columns-3 gap-4 [&>*]:mb-4 reveal">
+        {shots.map((name, i) => (
+          <div class="zoom-img rounded-xl break-inside-avoid">
+            <img src={`/images/ph/${name}.svg`} alt={`${t.gallery.title} ${i + 1}`} loading="lazy" class="w-full object-cover" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

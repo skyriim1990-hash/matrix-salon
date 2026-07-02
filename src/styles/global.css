@@ -1,30 +1,98 @@
 @import "tailwindcss";
 
-/* ---- Brand theme -------------------------------------------------------
-   Change these colors to match your salon's branding. They are used
-   throughout the site via classes like text-brand, bg-brand, etc.        */
+/* ============================================================
+   MATRIX — dark, elegant salon theme
+   Warm neutral palette anchored on the charcoal "SM" logo.
+   Adjust the tokens below to shift the whole site's mood.
+   ============================================================ */
 @theme {
-  --color-brand: #b08968;
-  --color-brand-dark: #7f5539;
-  --color-brand-light: #e6ccb2;
-  --color-cream: #fdf8f3;
-  --color-ink: #2c2420;
+  /* Surfaces (dark) */
+  --color-ink: #100e0c;          /* near-black page background */
+  --color-charcoal: #1a1714;     /* raised surfaces / cards */
+  --color-charcoal-2: #242019;   /* hover / borders */
 
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  /* Warm neutrals + accent */
+  --color-cream: #f5efe6;        /* primary light text */
+  --color-sand: #d8c7b0;         /* secondary text */
+  --color-gold: #c8a97e;         /* accent (buttons, lines, prices) */
+  --color-gold-soft: #e3cfb0;    /* accent hover */
+
+  /* Light section surface (subtle contrast blocks) */
+  --color-paper: #f7f2ea;
+
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-script: "Great Vibes", cursive;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--color-ink);
 }
 
 body {
   font-family: var(--font-body);
-  color: var(--color-ink);
-  background-color: var(--color-cream);
+  color: var(--color-cream);
+  background-color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Small uppercase eyebrow label used across sections */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Thin decorative divider with centered marks */
+.rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-gold);
+}
+.rule::before,
+.rule::after {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+/* Reveal-on-scroll (progressive enhancement; content shows even without JS) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s var(--ease-out-soft), transform 0.7s var(--ease-out-soft);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Subtle image zoom on hover for gallery/feature tiles */
+.zoom-img {
+  overflow: hidden;
+}
+.zoom-img img {
+  transition: transform 0.9s var(--ease-out-soft);
+}
+.zoom-img:hover img {
+  transform: scale(1.06);
 }

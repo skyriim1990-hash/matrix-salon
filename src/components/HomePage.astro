@@ -1,0 +1,280 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ui, business, localize, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+
+const bookHref = business.bookingUrl && business.bookingUrl.length > 0 ? business.bookingUrl : localize('/contact', lang);
+const bookExternal = Boolean(business.bookingUrl && business.bookingUrl.length > 0);
+const bookAttrs = bookExternal ? { target: '_blank', rel: 'noopener' } : {};
+const address = lang === 'bg' ? business.addressBg : business.addressEn;
+const tel = business.phone.replace(/[^+\d]/g, '');
+
+const work = [1, 2, 3, 4, 5, 6];
+---
+
+<Layout lang={lang}>
+  <!-- ===== HERO ===== -->
+  <section class="relative isolate min-h-dvh flex items-center overflow-hidden">
+    <img
+      src="/images/ph/hero.svg"
+      alt=""
+      class="absolute inset-0 -z-20 h-full w-full object-cover"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink/70 via-ink/55 to-ink"></div>
+
+    <div class="max-w-7xl mx-auto w-full px-4 sm:px-8 pt-32 pb-20">
+      <div class="max-w-3xl reveal">
+        <p class="eyebrow">{t.hero.eyebrow}</p>
+        <h1 class="mt-6 text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-cream">
+          {t.hero.titleTop}<br />
+          <span class="text-gold-soft italic">{t.hero.titleBottom}</span>
+        </h1>
+        <p class="mt-8 max-w-xl text-lg leading-relaxed text-sand/90">{t.hero.text}</p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href={bookHref} {...bookAttrs} class="rounded-full bg-gold px-8 py-3.5 text-sm tracking-widest uppercase text-ink transition hover:bg-gold-soft">
+            {t.hero.ctaPrimary}
+          </a>
+          <a href={localize('/services', lang)} class="rounded-full border border-cream/30 px-8 py-3.5 text-sm tracking-widest uppercase text-cream transition hover:border-gold hover:text-gold">
+            {t.hero.ctaSecondary}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <a href="#invite" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-cream/50 hover:text-gold transition" aria-label="Scroll down">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <!-- ===== INVITE ===== -->
+  <section id="invite" class="py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 grid gap-12 lg:grid-cols-2 items-center">
+      <div class="grid grid-cols-2 gap-4 reveal">
+        <div class="zoom-img rounded-2xl mt-10">
+          <img src="/images/ph/invite-1.svg" alt="" loading="lazy" width="820" height="1040" class="w-full h-full object-cover" />
+        </div>
+        <div class="zoom-img rounded-2xl">
+          <img src="/images/ph/invite-2.svg" alt="" loading="lazy" width="820" height="1040" class="w-full h-full object-cover" />
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">{t.invite.eyebrow}</p>
+        <h2 class="mt-5 text-4xl sm:text-5xl leading-tight text-cream">{t.invite.title}</h2>
+        <p class="mt-6 text-lg leading-relaxed text-sand/85">{t.invite.text}</p>
+        <a href={localize('/services', lang)} class="mt-8 inline-flex items-center gap-2 text-sm tracking-widest uppercase text-gold hover:text-gold-soft">
+          {t.invite.cta}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OFFERINGS ===== -->
+  <section class="py-24 sm:py-32 bg-charcoal border-y border-charcoal-2">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8">
+      <div class="text-center reveal">
+        <span class="rule mb-6"></span>
+        <p class="eyebrow">{t.offerings.eyebrow}</p>
+        <h2 class="mt-4 text-4xl sm:text-5xl text-cream">{t.offerings.title}</h2>
+        <p class="mt-4 max-w-2xl mx-auto text-sand/75">{t.offerings.text}</p>
+      </div>
+
+      <div class="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2 reveal">
+        {t.offerings.services.map((s) => (
+          <div class="group border-b border-white/8 pb-6">
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="text-2xl text-cream group-hover:text-gold-soft transition-colors">{s.name}</h3>
+              <span class="whitespace-nowrap text-lg text-gold tabular-nums">{s.price}</span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-sand/65">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-14 flex flex-wrap justify-center gap-4">
+        <a href={bookHref} {...bookAttrs} class="rounded-full bg-gold px-8 py-3.5 text-sm tracking-widest uppercase text-ink transition hover:bg-gold-soft">
+          {t.offerings.bookOne}
+        </a>
+        <a href={localize('/services', lang)} class="rounded-full border border-cream/25 px-8 py-3.5 text-sm tracking-widest uppercase text-cream transition hover:border-gold hover:text-gold">
+          {t.offerings.browseAll}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT + STATS ===== -->
+  <section class="py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 grid gap-14 lg:grid-cols-2 items-center">
+      <div class="zoom-img rounded-2xl reveal">
+        <img src="/images/ph/about.svg" alt="" loading="lazy" width="1000" height="1240" class="w-full object-cover" />
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">{t.about.eyebrow}</p>
+        <h2 class="mt-5 text-4xl sm:text-6xl leading-tight text-cream uppercase tracking-wide">{t.about.title}</h2>
+        <p class="mt-6 text-lg leading-relaxed text-sand/85">{t.about.text}</p>
+        <div class="mt-12 grid grid-cols-2 gap-8">
+          <div>
+            <p class="text-6xl text-gold font-display">{t.about.years}</p>
+            <p class="mt-2 text-sm tracking-widest uppercase text-sand/70">{t.about.yearsLabel}</p>
+          </div>
+          <div>
+            <p class="text-6xl text-gold font-display">{t.about.clients}</p>
+            <p class="mt-2 text-sm tracking-widest uppercase text-sand/70">{t.about.clientsLabel}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY PREVIEW ===== -->
+  <section class="py-24 sm:py-32 bg-charcoal border-y border-charcoal-2">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="text-center reveal">
+        <p class="eyebrow">{t.gallery.eyebrow}</p>
+        <h2 class="mt-4 text-4xl sm:text-5xl text-cream">{t.gallery.title}</h2>
+        <p class="mt-4 text-sand/75">{t.gallery.text}</p>
+      </div>
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 reveal">
+        {work.map((n) => (
+          <a href={localize('/gallery', lang)} class="zoom-img block aspect-square rounded-xl">
+            <img src={`/images/ph/work-${n}.svg`} alt={`${t.gallery.title} ${n}`} loading="lazy" width="900" height="900" class="w-full h-full object-cover" />
+          </a>
+        ))}
+      </div>
+      <div class="mt-12 text-center">
+        <a href={localize('/gallery', lang)} class="inline-flex items-center gap-2 text-sm tracking-widest uppercase text-gold hover:text-gold-soft">
+          {t.gallery.viewAll}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE QUOTE ===== -->
+  <section class="py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 grid gap-4 md:grid-cols-3">
+      <div class="md:col-span-2 relative zoom-img rounded-2xl reveal">
+        <img src="/images/ph/feature-5.svg" alt="" loading="lazy" width="1440" height="640" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-ink/45 flex items-center justify-center text-center p-8">
+          <p class="font-display italic text-3xl sm:text-4xl text-cream max-w-lg">“{t.feature.quote}”<span class="block mt-4 text-base not-italic tracking-widest uppercase text-gold font-body">{t.feature.signature}</span></p>
+        </div>
+      </div>
+      <div class="grid gap-4 reveal">
+        <div class="zoom-img rounded-2xl"><img src="/images/ph/feature-2.svg" alt="" loading="lazy" width="720" height="940" class="w-full h-full object-cover" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="py-24 sm:py-32 bg-charcoal border-y border-charcoal-2">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8">
+      <div class="text-center reveal">
+        <p class="eyebrow">{t.testimonials.eyebrow}</p>
+        <h2 class="mt-4 text-4xl sm:text-5xl text-cream">{t.testimonials.title}</h2>
+      </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-3 reveal">
+        {t.testimonials.items.map((item) => (
+          <figure class="rounded-2xl bg-ink/60 ring-1 ring-white/8 p-8">
+            <div class="flex gap-1 text-gold">
+              {[1,2,3,4,5].map(() => (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.9 1.3 7L12 18l-6.3 3.3L7 14.3l-5-4.9 7-.9z"/></svg>
+              ))}
+            </div>
+            <blockquote class="mt-5 text-lg font-display italic leading-relaxed text-cream/90">“{item.quote}”</blockquote>
+            <figcaption class="mt-6">
+              <p class="text-sm text-cream">{item.name}</p>
+              <p class="text-xs tracking-widest uppercase text-sand/60">{item.role}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BOOKING / CONTACT ===== -->
+  <section id="book" class="py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 grid gap-14 lg:grid-cols-2">
+      <div class="reveal">
+        <p class="eyebrow">{t.booking.eyebrow}</p>
+        <h2 class="mt-4 text-4xl sm:text-5xl text-cream">{t.booking.title}</h2>
+        <p class="mt-5 max-w-md text-sand/80">{t.booking.text}</p>
+
+        <div class="mt-10 space-y-6">
+          <div>
+            <h3 class="text-gold text-sm tracking-widest uppercase mb-2">{t.booking.findUs}</h3>
+            <a href={business.mapsUrl} target="_blank" rel="noopener" class="text-cream/85 hover:text-gold">{address}</a>
+            <div class="mt-1 flex flex-wrap gap-x-6 text-sm text-sand/75">
+              <a href={`tel:${tel}`} class="hover:text-gold">{business.phone}</a>
+              <a href={`mailto:${business.email}`} class="hover:text-gold">{business.email}</a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-gold text-sm tracking-widest uppercase mb-2">{t.booking.hoursTitle}</h3>
+            <ul class="text-sm space-y-1 text-sand/80 max-w-xs">
+              {t.hoursList.map((h) => (
+                <li class="flex justify-between gap-4"><span>{h.day}</span><span class="text-cream/55 tabular-nums">{h.time}</span></li>
+              ))}
+            </ul>
+          </div>
+          {bookExternal && (
+            <a href={business.bookingUrl} target="_blank" rel="noopener" class="inline-block rounded-full bg-gold px-8 py-3.5 text-sm tracking-widest uppercase text-ink transition hover:bg-gold-soft">
+              {t.nav.book}
+            </a>
+          )}
+        </div>
+      </div>
+
+      <!-- Contact form (see note in README to connect it to a free form service) -->
+      <form
+        action="https://formspree.io/f/your-form-id"
+        method="POST"
+        class="reveal rounded-2xl bg-charcoal ring-1 ring-white/8 p-8 space-y-5"
+      >
+        <div class="grid sm:grid-cols-2 gap-5">
+          <label class="block">
+            <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.name}</span>
+            <input name="name" type="text" required autocomplete="name" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream placeholder-white/30 focus:border-gold focus:outline-none" />
+          </label>
+          <label class="block">
+            <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.phone}</span>
+            <input name="phone" type="tel" autocomplete="tel" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream placeholder-white/30 focus:border-gold focus:outline-none" />
+          </label>
+        </div>
+        <label class="block">
+          <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.email}</span>
+          <input name="email" type="email" required autocomplete="email" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream placeholder-white/30 focus:border-gold focus:outline-none" />
+        </label>
+        <label class="block">
+          <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.message}</span>
+          <textarea name="message" rows="4" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream placeholder-white/30 focus:border-gold focus:outline-none"></textarea>
+        </label>
+        <button type="submit" class="w-full rounded-full bg-gold px-8 py-3.5 text-sm tracking-widest uppercase text-ink transition hover:bg-gold-soft">
+          {t.booking.submit}
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOLLOW STRIP ===== -->
+  <section class="pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="flex items-center justify-between mb-6 reveal">
+        <h2 class="text-2xl sm:text-3xl text-cream">{t.follow.title} <a href={business.instagram} target="_blank" rel="noopener" class="text-gold">@matrix</a></h2>
+        <a href={business.instagram} target="_blank" rel="noopener" class="rounded-full border border-cream/25 px-6 py-2.5 text-xs tracking-widest uppercase text-cream hover:border-gold hover:text-gold">{t.follow.cta}</a>
+      </div>
+      <div class="grid grid-cols-3 sm:grid-cols-5 gap-3 reveal">
+        {[1,2,3,4,5].map((n) => (
+          <a href={business.instagram} target="_blank" rel="noopener" class="zoom-img block aspect-square rounded-lg">
+            <img src={`/images/ph/insta-${n}.svg`} alt={`Instagram ${n}`} loading="lazy" width="640" height="640" class="w-full h-full object-cover" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

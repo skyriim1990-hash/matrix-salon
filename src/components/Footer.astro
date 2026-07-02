@@ -1,44 +1,67 @@
 ---
-import site from '../data/site.json';
+import { ui, business, localize, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
 const year = new Date().getFullYear();
+const address = lang === 'bg' ? business.addressBg : business.addressEn;
+const tel = business.phone.replace(/[^+\d]/g, '');
+
+const links = [
+  { path: '/', label: t.nav.home },
+  { path: '/services', label: t.nav.services },
+  { path: '/gallery', label: t.nav.gallery },
+  { path: '/contact', label: t.nav.contact },
+];
 ---
 
-<footer class="bg-brand-dark text-cream/90">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid gap-8 sm:grid-cols-3">
-    <div>
-      <h3 class="text-xl text-white mb-2">{site.businessName}</h3>
-      <p class="text-sm text-cream/70">{site.tagline}</p>
+<footer class="bg-charcoal border-t border-charcoal-2">
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 py-16 grid gap-12 md:grid-cols-4">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-3">
+        <img src={business.logo} alt={business.name} width="48" height="48" class="h-12 w-12 object-contain" />
+        <span class="text-2xl tracking-[0.2em] text-cream uppercase">{business.name}</span>
+      </div>
+      <p class="mt-5 max-w-sm text-sm leading-relaxed text-sand/80">{t.footer.tagline}</p>
+      <div class="mt-6 flex gap-4">
+        <a href={business.instagram} target="_blank" rel="noopener" class="text-xs tracking-widest uppercase text-cream/60 hover:text-gold">Instagram</a>
+        <a href={business.facebook} target="_blank" rel="noopener" class="text-xs tracking-widest uppercase text-cream/60 hover:text-gold">Facebook</a>
+      </div>
     </div>
 
     <div>
-      <h4 class="text-white mb-3 text-lg">Visit us</h4>
-      <p class="text-sm leading-relaxed">
-        <a href={site.mapsUrl} class="hover:text-white">{site.address}</a><br />
-        <a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="hover:text-white">{site.phone}</a><br />
-        <a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a>
-      </p>
+      <h4 class="text-gold text-sm tracking-widest uppercase mb-4">{t.footer.contact}</h4>
+      <address class="not-italic text-sm leading-relaxed text-sand/80 space-y-1">
+        <a href={business.mapsUrl} target="_blank" rel="noopener" class="block hover:text-gold">{address}</a>
+        <a href={`tel:${tel}`} class="block hover:text-gold">{business.phone}</a>
+        <a href={`mailto:${business.email}`} class="block hover:text-gold">{business.email}</a>
+      </address>
     </div>
 
     <div>
-      <h4 class="text-white mb-3 text-lg">Opening hours</h4>
-      <ul class="text-sm space-y-1">
-        {site.hours.map((h) => (
+      <h4 class="text-gold text-sm tracking-widest uppercase mb-4">{t.footer.hours}</h4>
+      <ul class="text-sm space-y-1.5 text-sand/80">
+        {t.hoursList.map((h) => (
           <li class="flex justify-between gap-4">
             <span>{h.day}</span>
-            <span class="text-cream/70">{h.time}</span>
+            <span class="text-cream/55 tabular-nums">{h.time}</span>
           </li>
         ))}
       </ul>
     </div>
   </div>
 
-  <div class="border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/60">
-      <p>© {year} {site.businessName}. All rights reserved.</p>
-      <div class="flex gap-4">
-        {site.instagram && <a href={site.instagram} class="hover:text-white">Instagram</a>}
-        {site.facebook && <a href={site.facebook} class="hover:text-white">Facebook</a>}
-      </div>
+  <div class="border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/45">
+      <p>© {year} {business.name}. {t.footer.rights}</p>
+      <nav class="flex gap-5">
+        {links.map((l) => (
+          <a href={localize(l.path, lang)} class="tracking-widest uppercase hover:text-gold">{l.label}</a>
+        ))}
+      </nav>
     </div>
   </div>
 </footer>

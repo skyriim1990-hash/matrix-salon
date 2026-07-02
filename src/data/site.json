@@ -1,7 +1,8 @@
 {
-  "businessName": "Bella Hair Studio",
-  "tagline": "Modern cuts, color & styling — crafted just for you",
-  "intro": "A boutique salon where every visit is relaxed, personal, and finished with care. Book in for a fresh cut, a bold new color, or styling for your big day.",
+  "businessName": "Matrix",
+  "logo": "/images/logo.png",
+  "tagline": "Hair & nails beauty salon — modern cuts, colour & care",
+  "intro": "A boutique salon for hair and nails where every visit is relaxed, personal, and finished with care. Book in for a fresh cut, a bold new colour, or beautifully styled nails.",
   "phone": "+1 (555) 123-4567",
   "email": "hello@bellahair.example",
   "address": "123 High Street, Your Town, ST 12345",
