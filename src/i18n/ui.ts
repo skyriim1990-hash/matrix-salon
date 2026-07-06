@@ -17,11 +17,13 @@ export const business = {
   email: 'liliqgeorgieva19@gmail.com',
   addressBg: 'гр. Враца, бул. „Втори Юни“ 19',
   addressEn: 'Vratsa, 19 Vtori Yuni Blvd',
-  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=бул.+Втори+Юни+19,+Враца',
+  mapsUrl: 'https://maps.app.goo.gl/kYibgDRSiCVz21ga9',
   bookingUrl: 'https://partner.notino.com/api/notino-partner/b2c/redirect/link/qaDxtNy2ODyw', // Notino online booking
   instagram: 'https://www.instagram.com/hair_salon_matrix?igsh=am5nbm13d2xodHlt',
   instagramHandle: '@hair_salon_matrix',
   facebook: 'https://www.facebook.com/share/1DJCBgCAnZ/',
+  notinoIos: 'https://apps.apple.com/gb/app/notino-perfumes-and-cosmetics/id1261812151',
+  notinoAndroid: 'https://play.google.com/store/apps/details?id=com.pragonauts.notino&hl=bg',
 };
 
 type Price = { name: string; desc?: string; time?: string; eur: string; bgn: string };
@@ -41,6 +43,7 @@ interface Dict {
   testimonials: { eyebrow: string; title: string; items: Testimonial[] };
   feature: { title: string; discover: string; quote: string; signature: string; products: string };
   follow: { title: string; cta: string };
+  notino: { eyebrow: string; title: string; button: string; download: string; getOn: string };
   footer: { tagline: string; hours: string; nav: string; contact: string; rights: string };
   hoursList: { day: string; time: string }[];
   meta: { title: string; description: string };
@@ -176,6 +179,7 @@ export const ui: Record<Lang, Dict> = {
       products: 'Продукти',
     },
     follow: { title: 'Последвайте ни', cta: 'Последвай' },
+    notino: { eyebrow: 'Резервация', title: 'За запазване на час посетете приложението на NOTINO', button: 'Запази час', download: 'Ако нямате приложението, свалете го оттук:', getOn: 'Свали от' },
     footer: {
       tagline: 'Салон за коса в сърцето на Враца — модерни подстригвания, цвят и грижа.',
       hours: 'Работно време',
@@ -323,6 +327,7 @@ export const ui: Record<Lang, Dict> = {
       products: 'Products',
     },
     follow: { title: 'Follow us', cta: 'Follow' },
+    notino: { eyebrow: 'Booking', title: 'To book an appointment, use the NOTINO app', button: 'Book now', download: "If you don't have the app, download it here:", getOn: 'Get it on' },
     footer: {
       tagline: 'A hair salon in the heart of Vratsa — modern cuts, colour and care.',
       hours: 'Opening hours',

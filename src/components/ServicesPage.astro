@@ -1,20 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CategoryMenu from './CategoryMenu.astro';
-import { ui, business, localize, type Lang } from '../i18n/ui';
+import NotinoBooking from './NotinoBooking.astro';
+import { ui, business, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const t = ui[lang];
-const bookHref = business.bookingUrl && business.bookingUrl.length > 0 ? business.bookingUrl : localize('/contact', lang);
-const bookExternal = Boolean(business.bookingUrl && business.bookingUrl.length > 0);
-const bookAttrs = bookExternal ? { target: '_blank', rel: 'noopener' } : {};
 ---
 
 <Layout lang={lang} title={`${t.nav.services} — ${business.name}`} description={t.meta.description}>
-  <section class="pt-36 pb-24 sm:pb-32">
+  <section class="pt-36 pb-10">
     <div class="max-w-6xl mx-auto px-4 sm:px-8">
       <div class="text-center max-w-2xl mx-auto reveal">
         <span class="rule mb-6"></span>
@@ -35,14 +33,9 @@ const bookAttrs = bookExternal ? { target: '_blank', rel: 'noopener' } : {};
           ))}
         </div>
       </div>
-
-      <div class="mt-20 rounded-3xl bg-charcoal ring-1 ring-white/8 px-6 py-14 text-center reveal">
-        <h2 class="text-3xl sm:text-4xl text-cream">{t.booking.title}</h2>
-        <p class="mt-3 text-sand/75">{t.booking.text}</p>
-        <a href={bookHref} {...bookAttrs} class="mt-8 inline-block rounded-full bg-gold px-8 py-3.5 text-sm tracking-widest uppercase text-ink transition hover:bg-gold-soft">
-          {t.nav.book}
-        </a>
-      </div>
     </div>
   </section>
+
+  <!-- Booking / Notino field at the bottom -->
+  <NotinoBooking lang={lang} />
 </Layout>
