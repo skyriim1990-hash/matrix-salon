@@ -101,10 +101,6 @@ export const ui: Record<Lang, Dict> = {
               { name: 'Пробна / Вечерна прическа', desc: 'Консултация, оформяне, фиксация.', time: '1 ч', eur: '30 €', bgn: '58,67 лв.' },
               { name: 'Официална прическа', desc: 'Консултация, оформяне на косата, фиксация.', time: '1 – 1,5 ч', eur: '45 €', bgn: '88,01 лв.' },
             ]},
-            { title: 'Head spa', items: [
-              { name: 'Premium Luxury Ritual', desc: 'Включва диагностика на скалпа и луксозна възстановяваща терапия.', time: '1,5 ч – 1 ч 50 мин', eur: '90 €', bgn: '176,02 лв.' },
-              { name: 'Relax Ritual', desc: 'Включва диагностика на скалпа и релаксираща терапия.', time: '1 ч 5 мин – 1 ч 20 мин', eur: '75 €', bgn: '146,69 лв.' },
-            ]},
           ],
         },
         {
@@ -122,6 +118,15 @@ export const ui: Record<Lang, Dict> = {
             { items: [
               { name: 'Детско подстригване – момичета (до 15 г.)', desc: 'Съобразяване с желанието на малкия клиент и одобрителния поглед на родителя :)', time: '30 мин', eur: '8 €', bgn: '15,65 лв.' },
               { name: 'Детско подстригване – момчета (до 15 г.)', desc: 'Съобразяване с желанието на малкия клиент и одобрителния поглед на родителя :)', time: '30 мин', eur: '8 €', bgn: '15,65 лв.' },
+            ]},
+          ],
+        },
+        {
+          title: 'Head spa',
+          groups: [
+            { items: [
+              { name: 'Premium Luxury Ritual', desc: 'Включва диагностика на скалпа и луксозна възстановяваща терапия.', time: '1,5 ч – 1 ч 50 мин', eur: '90 €', bgn: '176,02 лв.' },
+              { name: 'Relax Ritual', desc: 'Включва диагностика на скалпа и релаксираща терапия.', time: '1 ч 5 мин – 1 ч 20 мин', eur: '75 €', bgn: '146,69 лв.' },
             ]},
           ],
         },
@@ -158,9 +163,9 @@ export const ui: Record<Lang, Dict> = {
       eyebrow: 'Отзиви',
       title: 'Какво казват клиентите',
       items: [
-        { quote: 'Най-добрият салон във Враца. Излизам с усмивка всеки път.', name: 'Мария Петрова', role: 'Редовен клиент' },
-        { quote: 'Невероятно внимание към детайла и топло отношение.', name: 'Елена Иванова', role: 'Клиент' },
-        { quote: 'Балеажът ми изглежда естествен и се поддържа лесно.', name: 'Десислава К.', role: 'Клиент' },
+        { quote: 'Лили е великолепна! Салонът е на оживено и достъпно място.', name: 'Didi Tzvetkova', role: 'Отзив в Google' },
+        { quote: 'Качествено обслужване от професионалисти! Браво!', name: 'Тихомир Иванов', role: 'Отзив в Google' },
+        { quote: 'Отличен избор.', name: 'Анатоли Митков', role: 'Отзив в Google' },
       ],
     },
     feature: {
@@ -243,10 +248,6 @@ export const ui: Record<Lang, Dict> = {
               { name: 'Trial / evening updo', desc: 'Consultation, styling and fixing.', time: '1h', eur: '30 €', bgn: '58.67 lv.' },
               { name: 'Occasion updo', desc: 'Consultation, hair styling and fixing.', time: '1 – 1.5h', eur: '45 €', bgn: '88.01 lv.' },
             ]},
-            { title: 'Head spa', items: [
-              { name: 'Premium Luxury Ritual', desc: 'Includes scalp diagnosis and a luxury restorative treatment.', time: '1.5h – 1h 50m', eur: '90 €', bgn: '176.02 lv.' },
-              { name: 'Relax Ritual', desc: 'Includes scalp diagnosis and a relaxing treatment.', time: '1h 5m – 1h 20m', eur: '75 €', bgn: '146.69 lv.' },
-            ]},
           ],
         },
         {
@@ -264,6 +265,15 @@ export const ui: Record<Lang, Dict> = {
             { items: [
               { name: "Kids' cut – girls (up to 15)", desc: "Tailored to the little client's wishes and the parent's approving nod :)", time: '30m', eur: '8 €', bgn: '15.65 lv.' },
               { name: "Kids' cut – boys (up to 15)", desc: "Tailored to the little client's wishes and the parent's approving nod :)", time: '30m', eur: '8 €', bgn: '15.65 lv.' },
+            ]},
+          ],
+        },
+        {
+          title: 'Head spa',
+          groups: [
+            { items: [
+              { name: 'Premium Luxury Ritual', desc: 'Includes scalp diagnosis and a luxury restorative treatment.', time: '1.5h – 1h 50m', eur: '90 €', bgn: '176.02 lv.' },
+              { name: 'Relax Ritual', desc: 'Includes scalp diagnosis and a relaxing treatment.', time: '1h 5m – 1h 20m', eur: '75 €', bgn: '146.69 lv.' },
             ]},
           ],
         },
@@ -300,9 +310,9 @@ export const ui: Record<Lang, Dict> = {
       eyebrow: 'Reviews',
       title: 'What our clients say',
       items: [
-        { quote: 'The best salon in Vratsa. I leave with a smile every time.', name: 'Maria Petrova', role: 'Regular client' },
-        { quote: 'Incredible attention to detail and such a warm welcome.', name: 'Elena Ivanova', role: 'Client' },
-        { quote: 'My balayage looks natural and is so easy to maintain.', name: 'Desislava K.', role: 'Client' },
+        { quote: 'Lili is wonderful! The salon is in a lively, easy-to-reach spot.', name: 'Didi Tzvetkova', role: 'Google review' },
+        { quote: 'Quality service from true professionals. Bravo!', name: 'Tihomir Ivanov', role: 'Google review' },
+        { quote: 'An excellent choice.', name: 'Anatoli Mitkov', role: 'Google review' },
       ],
     },
     feature: {
