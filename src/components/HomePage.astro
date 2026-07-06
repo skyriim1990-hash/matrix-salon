@@ -249,20 +249,4 @@ const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent('бул. В
     </div>
   </section>
 
-  <!-- ===== FOLLOW STRIP ===== -->
-  <section class="pb-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8">
-      <div class="flex items-center justify-between mb-6 reveal">
-        <h2 class="text-2xl sm:text-3xl text-cream">{t.follow.title} <a href={business.instagram} target="_blank" rel="noopener" class="text-gold">{business.instagramHandle}</a></h2>
-        <a href={business.instagram} target="_blank" rel="noopener" class="rounded-full border border-cream/25 px-6 py-2.5 text-xs tracking-widest uppercase text-cream hover:border-gold hover:text-gold">{t.follow.cta}</a>
-      </div>
-      <div class="grid grid-cols-3 sm:grid-cols-5 gap-3 reveal">
-        {[1,2,3,4,5].map((n) => (
-          <a href={business.instagram} target="_blank" rel="noopener" class="zoom-img block aspect-square rounded-lg">
-            <Picture src={salon[`insta-${n}`]} formats={fmt} fallbackFormat="webp" alt={`Instagram ${n}`} widths={[300, 500]} sizes="(min-width:640px) 20vw, 33vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
 </Layout>
