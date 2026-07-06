@@ -13,24 +13,28 @@ export const defaultLang: Lang = 'bg';
 export const business = {
   name: 'Matrix',
   logo: '/images/logo.svg',
-  phone: '+359 88 000 0000',
-  email: 'studio@matrix-vratsa.bg',
-  addressBg: 'гр. Враца, ул. „Примерна“ 12',
-  addressEn: 'Vratsa, 12 Primerna St.',
-  mapsUrl: 'https://maps.google.com/?q=Vratsa+Bulgaria',
-  bookingUrl: '', // paste your Fresha / Booksy / Instagram booking link here
-  instagram: 'https://instagram.com/',
-  facebook: 'https://facebook.com/',
+  phone: '0877 576 786',
+  email: 'liliqgeorgieva19@gmail.com',
+  addressBg: 'гр. Враца, бул. „Втори Юни“ 19',
+  addressEn: 'Vratsa, 19 Vtori Yuni Blvd',
+  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=бул.+Втори+Юни+19,+Враца',
+  bookingUrl: 'https://partner.notino.com/api/notino-partner/b2c/redirect/link/qaDxtNy2ODyw', // Notino online booking
+  instagram: 'https://www.instagram.com/hair_salon_matrix?igsh=am5nbm13d2xodHlt',
+  instagramHandle: '@hair_salon_matrix',
+  facebook: 'https://www.facebook.com/share/1DJCBgCAnZ/',
 };
 
-type Service = { name: string; price: string; desc: string };
+type Price = { name: string; desc?: string; time?: string; eur: string; bgn: string };
+type Highlight = { name: string; eur: string; bgn: string };
+type MenuGroup = { title?: string; items: Price[] };
+type MenuCat = { title: string; groups: MenuGroup[] };
 type Testimonial = { quote: string; name: string; role: string };
 
 interface Dict {
   nav: { home: string; services: string; gallery: string; contact: string; book: string };
   hero: { eyebrow: string; titleTop: string; titleBottom: string; text: string; ctaPrimary: string; ctaSecondary: string };
   invite: { eyebrow: string; title: string; text: string; cta: string };
-  offerings: { eyebrow: string; title: string; text: string; from: string; bookOne: string; browseAll: string; services: Service[] };
+  offerings: { eyebrow: string; title: string; text: string; bookOne: string; browseAll: string; highlights: Highlight[]; menu: MenuCat[] };
   about: { eyebrow: string; title: string; text: string; years: string; yearsLabel: string; clients: string; clientsLabel: string };
   gallery: { eyebrow: string; title: string; text: string; viewAll: string };
   booking: { eyebrow: string; title: string; text: string; name: string; email: string; phone: string; message: string; submit: string; hoursTitle: string; findUs: string };
@@ -60,19 +64,67 @@ export const ui: Record<Lang, Dict> = {
       cta: 'За нас',
     },
     offerings: {
-      eyebrow: 'Нашите услуги',
-      title: 'Разгледайте предложенията',
-      text: 'Малка част от това, което обичаме да правим. Пълният ценоразпис вижте на страница „Услуги“.',
-      from: 'от',
+      eyebrow: 'Ценоразпис',
+      title: 'Услуги и цени',
+      text: 'Цените са в евро и лева. Продължителността е ориентировъчна и зависи от дължината и типа на косата.',
       bookOne: 'Запазете час',
       browseAll: 'Всички услуги',
-      services: [
-        { name: 'Дамско подстригване', price: '35 лв.', desc: 'Персонализирано подстригване, съобразено с типа коса и стила ви, с измиване и оформяне.' },
-        { name: 'Мъжко подстригване', price: '20 лв.', desc: 'Изчистени, модерни мъжки прически — от класика до текстурирани стилове.' },
-        { name: 'Боядисване', price: 'от 55 лв.', desc: 'Наситен, равномерен цвят с висококачествени продукти за блясък и здраве.' },
-        { name: 'Балеаж и кичури', price: 'от 90 лв.', desc: 'Ръчно рисувани, естествени преливания, които растат красиво.' },
-        { name: 'Кератинова терапия', price: 'от 80 лв.', desc: 'Изглаждаща грижа за гладка, лъскава и здрава коса до месеци.' },
-        { name: 'Официална прическа', price: 'от 45 лв.', desc: 'Елегантни прически за сватби и специални поводи, с пробна визия.' },
+      highlights: [
+        { name: 'Подстригване и стайлинг', eur: '13 – 21 €', bgn: '25,43 – 41,07 лв.' },
+        { name: 'Боядисване', eur: '31 – 49 €', bgn: '60,63 – 95,84 лв.' },
+        { name: 'Балеаж / Фолиаж', eur: '123 – 144 €', bgn: '240,57 – 281,64 лв.' },
+        { name: 'Мъжко подстригване', eur: '11 €', bgn: '21,51 лв.' },
+        { name: 'Официална прическа', eur: '45 €', bgn: '88,01 лв.' },
+        { name: 'Детско подстригване', eur: '8 €', bgn: '15,65 лв.' },
+      ],
+      menu: [
+        {
+          title: 'Дамски услуги',
+          groups: [
+            { title: 'Подстригване', items: [
+              { name: 'Подстригване и стайлинг със сешоар', desc: 'Подстригване на косата и стайлинг със сешоар.', time: '30 мин – 1 ч', eur: '13 – 21 €', bgn: '25,43 – 41,07 лв.' },
+            ]},
+            { title: 'Боядисване на коса (без подстригване)', items: [
+              { name: 'Боядисване', desc: 'Диагностика, нанасяне на боя, измиване с подходящи продукти на Matrix + стайлинг.', time: '2 – 2,5 ч', eur: '31 – 49 €', bgn: '60,63 – 95,84 лв.' },
+              { name: 'Боядисване на корени', desc: 'Диагностика, нанасяне на боя, измиване с подходящи продукти на Matrix + стайлинг.', time: '2 ч', eur: '31 €', bgn: '60,63 лв.' },
+            ]},
+            { title: 'Боядисване + изсветляване на косата', items: [
+              { name: 'Класически кичури + боя', desc: 'Диагностика, отделяне на кичурите с изсветляващ продукт, боя + стайлинг.', time: '2 – 4 ч', eur: '100,20 €', bgn: '195,97 лв.' },
+              { name: 'Частични кичури', desc: 'Диагностика, отделяне и изсветляване на желаните зони, боя + стайлинг.', time: '2 – 3 ч', eur: '52 €', bgn: '101,70 лв.' },
+            ]},
+            { title: 'Балеаж', items: [
+              { name: 'Балеаж / Фолиаж', desc: 'Диагностика, секториране и прилагане на една или повече техники на изсветляване, боя и измиване.', time: '2 – 5 ч', eur: '123 – 144 €', bgn: '240,57 – 281,64 лв.' },
+            ]},
+            { title: 'Стайлинг', items: [
+              { name: 'Сешоар', desc: 'Масажно измиване с подбрани продукти на Matrix + стайлинг с четка и сешоар.', time: '1 ч', eur: '11 – 13 €', bgn: '21,51 – 25,43 лв.' },
+              { name: 'Сешоар + преса', desc: 'Масажно измиване с продукти на Matrix + стайлинг с четка, сешоар и преса/маша.', time: '1 ч', eur: '15 €', bgn: '29,34 лв.' },
+              { name: 'Пробна / Вечерна прическа', desc: 'Консултация, оформяне, фиксация.', time: '1 ч', eur: '30 €', bgn: '58,67 лв.' },
+              { name: 'Официална прическа', desc: 'Консултация, оформяне на косата, фиксация.', time: '1 – 1,5 ч', eur: '45 €', bgn: '88,01 лв.' },
+            ]},
+            { title: 'Head spa', items: [
+              { name: 'Premium Luxury Ritual', desc: 'Включва диагностика на скалпа и луксозна възстановяваща терапия.', time: '1,5 ч – 1 ч 50 мин', eur: '90 €', bgn: '176,02 лв.' },
+              { name: 'Relax Ritual', desc: 'Включва диагностика на скалпа и релаксираща терапия.', time: '1 ч 5 мин – 1 ч 20 мин', eur: '75 €', bgn: '146,69 лв.' },
+            ]},
+          ],
+        },
+        {
+          title: 'Мъжки услуги',
+          groups: [
+            { items: [
+              { name: 'Мъжко подстригване + измиване и стайлинг', desc: 'Мъжко подстригване, включва измиване на косата и стайлинг.', time: '30 мин', eur: '11 €', bgn: '21,51 лв.' },
+              { name: 'Мъжко подстригване + оформяне на брада', desc: 'Мъжко подстригване, включва оформяне на брадата според желаните форма и дължина.', time: '30 мин', eur: '13 €', bgn: '25,43 лв.' },
+            ]},
+          ],
+        },
+        {
+          title: 'Детски услуги',
+          groups: [
+            { items: [
+              { name: 'Детско подстригване – момичета (до 15 г.)', desc: 'Съобразяване с желанието на малкия клиент и одобрителния поглед на родителя :)', time: '30 мин', eur: '8 €', bgn: '15,65 лв.' },
+              { name: 'Детско подстригване – момчета (до 15 г.)', desc: 'Съобразяване с желанието на малкия клиент и одобрителния поглед на родителя :)', time: '30 мин', eur: '8 €', bgn: '15,65 лв.' },
+            ]},
+          ],
+        },
       ],
     },
     about: {
@@ -127,12 +179,8 @@ export const ui: Record<Lang, Dict> = {
       rights: 'Всички права запазени.',
     },
     hoursList: [
-      { day: 'Понеделник', time: 'Почивен ден' },
-      { day: 'Вторник', time: '09:00 – 18:00' },
-      { day: 'Сряда', time: '09:00 – 18:00' },
-      { day: 'Четвъртък', time: '09:00 – 20:00' },
-      { day: 'Петък', time: '09:00 – 20:00' },
-      { day: 'Събота', time: '08:00 – 16:00' },
+      { day: 'Понеделник – Петък', time: '10:00 – 19:00' },
+      { day: 'Събота', time: '10:00 – 17:00' },
       { day: 'Неделя', time: 'Почивен ден' },
     ],
     meta: {
@@ -158,19 +206,67 @@ export const ui: Record<Lang, Dict> = {
       cta: 'About us',
     },
     offerings: {
-      eyebrow: 'Our services',
-      title: 'Examine our offerings',
-      text: 'A few of the things we love to do. See the full price list on the Services page.',
-      from: 'from',
+      eyebrow: 'Price list',
+      title: 'Services & Prices',
+      text: 'Prices are shown in euro and Bulgarian lev. Durations are approximate and depend on hair length and type.',
       bookOne: 'Book an appointment',
       browseAll: 'All services',
-      services: [
-        { name: "Women's Cut & Finish", price: '35 lv.', desc: 'A personalised cut tailored to your hair type and style, with a wash and blow-dry.' },
-        { name: "Men's Cut", price: '20 lv.', desc: 'Sharp, modern men’s cuts — from classic to textured styles.' },
-        { name: 'Full Colour', price: 'from 55 lv.', desc: 'Rich, even colour with premium products for shine and health.' },
-        { name: 'Balayage & Highlights', price: 'from 90 lv.', desc: 'Hand-painted, natural dimension that grows out beautifully.' },
-        { name: 'Keratin Treatment', price: 'from 80 lv.', desc: 'A smoothing treatment for glossy, healthy hair that lasts for months.' },
-        { name: 'Occasion & Bridal Hair', price: 'from 45 lv.', desc: 'Elegant styling for weddings and special events, with a trial look.' },
+      highlights: [
+        { name: 'Cut & blow-dry styling', eur: '13 – 21 €', bgn: '25.43 – 41.07 lv.' },
+        { name: 'Full colour', eur: '31 – 49 €', bgn: '60.63 – 95.84 lv.' },
+        { name: 'Balayage / Foilage', eur: '123 – 144 €', bgn: '240.57 – 281.64 lv.' },
+        { name: "Men's cut", eur: '11 €', bgn: '21.51 lv.' },
+        { name: 'Occasion updo', eur: '45 €', bgn: '88.01 lv.' },
+        { name: "Kids' cut", eur: '8 €', bgn: '15.65 lv.' },
+      ],
+      menu: [
+        {
+          title: "Women's services",
+          groups: [
+            { title: 'Cut', items: [
+              { name: 'Cut & blow-dry styling', desc: 'Haircut and styling with a blow-dry.', time: '30m – 1h', eur: '13 – 21 €', bgn: '25.43 – 41.07 lv.' },
+            ]},
+            { title: 'Colour (without cut)', items: [
+              { name: 'Full colour', desc: 'Diagnosis, colour application, wash with suitable Matrix products + styling.', time: '2 – 2.5h', eur: '31 – 49 €', bgn: '60.63 – 95.84 lv.' },
+              { name: 'Root colour', desc: 'Diagnosis, colour application, wash with suitable Matrix products + styling.', time: '2h', eur: '31 €', bgn: '60.63 lv.' },
+            ]},
+            { title: 'Highlights & lightening', items: [
+              { name: 'Classic highlights + colour', desc: 'Diagnosis, separating strands with a lightening product, colour + styling.', time: '2 – 4h', eur: '100.20 €', bgn: '195.97 lv.' },
+              { name: 'Partial highlights', desc: 'Diagnosis, lightening the desired areas, colour + styling.', time: '2 – 3h', eur: '52 €', bgn: '101.70 lv.' },
+            ]},
+            { title: 'Balayage', items: [
+              { name: 'Balayage / Foilage', desc: 'Diagnosis, sectioning and one or more lightening techniques, colour and wash.', time: '2 – 5h', eur: '123 – 144 €', bgn: '240.57 – 281.64 lv.' },
+            ]},
+            { title: 'Styling', items: [
+              { name: 'Blow-dry', desc: 'Massage wash with selected Matrix products + brush and blow-dry styling.', time: '1h', eur: '11 – 13 €', bgn: '21.51 – 25.43 lv.' },
+              { name: 'Blow-dry + flat iron', desc: 'Massage wash with Matrix products + brush, blow-dry and flat iron/curling.', time: '1h', eur: '15 €', bgn: '29.34 lv.' },
+              { name: 'Trial / evening updo', desc: 'Consultation, styling and fixing.', time: '1h', eur: '30 €', bgn: '58.67 lv.' },
+              { name: 'Occasion updo', desc: 'Consultation, hair styling and fixing.', time: '1 – 1.5h', eur: '45 €', bgn: '88.01 lv.' },
+            ]},
+            { title: 'Head spa', items: [
+              { name: 'Premium Luxury Ritual', desc: 'Includes scalp diagnosis and a luxury restorative treatment.', time: '1.5h – 1h 50m', eur: '90 €', bgn: '176.02 lv.' },
+              { name: 'Relax Ritual', desc: 'Includes scalp diagnosis and a relaxing treatment.', time: '1h 5m – 1h 20m', eur: '75 €', bgn: '146.69 lv.' },
+            ]},
+          ],
+        },
+        {
+          title: "Men's services",
+          groups: [
+            { items: [
+              { name: "Men's cut + wash & styling", desc: "Men's haircut, includes hair wash and styling.", time: '30m', eur: '11 €', bgn: '21.51 lv.' },
+              { name: "Men's cut + beard shaping", desc: "Men's haircut, includes beard shaping to the desired shape and length.", time: '30m', eur: '13 €', bgn: '25.43 lv.' },
+            ]},
+          ],
+        },
+        {
+          title: "Children's services",
+          groups: [
+            { items: [
+              { name: "Kids' cut – girls (up to 15)", desc: "Tailored to the little client's wishes and the parent's approving nod :)", time: '30m', eur: '8 €', bgn: '15.65 lv.' },
+              { name: "Kids' cut – boys (up to 15)", desc: "Tailored to the little client's wishes and the parent's approving nod :)", time: '30m', eur: '8 €', bgn: '15.65 lv.' },
+            ]},
+          ],
+        },
       ],
     },
     about: {
@@ -225,12 +321,8 @@ export const ui: Record<Lang, Dict> = {
       rights: 'All rights reserved.',
     },
     hoursList: [
-      { day: 'Monday', time: 'Closed' },
-      { day: 'Tuesday', time: '09:00 – 18:00' },
-      { day: 'Wednesday', time: '09:00 – 18:00' },
-      { day: 'Thursday', time: '09:00 – 20:00' },
-      { day: 'Friday', time: '09:00 – 20:00' },
-      { day: 'Saturday', time: '08:00 – 16:00' },
+      { day: 'Monday – Friday', time: '10:00 – 19:00' },
+      { day: 'Saturday', time: '10:00 – 17:00' },
       { day: 'Sunday', time: 'Closed' },
     ],
     meta: {

@@ -16,8 +16,12 @@ const bookAttrs = bookExternal ? { target: '_blank', rel: 'noopener' } : {};
 const address = lang === 'bg' ? business.addressBg : business.addressEn;
 const tel = business.phone.replace(/[^+\d]/g, '');
 
-const work = [1, 2, 3, 4, 5, 6];
+// "Recent looks" = real client hair results only (no interiors).
+const looks = ['look-1', 'look-3', 'look-5', 'look-8', 'look-10', 'look-13'];
 const fmt = ['avif', 'webp'] as const;
+
+// Keyless Google Maps embed centred on the salon address.
+const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent('бул. Втори Юни 19, Враца')}&z=16&hl=${lang}&output=embed`;
 ---
 
 <Layout lang={lang}>
@@ -94,14 +98,14 @@ const fmt = ['avif', 'webp'] as const;
         <p class="mt-4 max-w-2xl mx-auto text-sand/75">{t.offerings.text}</p>
       </div>
 
-      <div class="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2 reveal">
-        {t.offerings.services.map((s) => (
-          <div class="group border-b border-white/8 pb-6">
-            <div class="flex items-baseline justify-between gap-4">
-              <h3 class="text-2xl text-cream group-hover:text-gold-soft transition-colors">{s.name}</h3>
-              <span class="whitespace-nowrap text-lg text-gold tabular-nums">{s.price}</span>
+      <div class="mt-14 grid gap-x-12 gap-y-6 sm:grid-cols-2 reveal">
+        {t.offerings.highlights.map((s) => (
+          <div class="group flex items-baseline justify-between gap-6 border-b border-white/8 pb-5">
+            <h3 class="text-xl sm:text-2xl text-cream group-hover:text-gold-soft transition-colors">{s.name}</h3>
+            <div class="text-right shrink-0">
+              <div class="text-xl sm:text-2xl text-gold tabular-nums leading-none">{s.eur}</div>
+              <div class="mt-1 text-xs text-sand/55 tabular-nums">{s.bgn}</div>
             </div>
-            <p class="mt-2 text-sm leading-relaxed text-sand/65">{s.desc}</p>
           </div>
         ))}
       </div>
@@ -150,9 +154,9 @@ const fmt = ['avif', 'webp'] as const;
         <p class="mt-4 text-sand/75">{t.gallery.text}</p>
       </div>
       <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 reveal">
-        {work.map((n) => (
+        {looks.map((name, i) => (
           <a href={localize('/gallery', lang)} class="zoom-img block aspect-square rounded-xl">
-            <Picture src={salon[`work-${n}`]} formats={fmt} fallbackFormat="webp" alt={`${t.gallery.title} ${n}`} widths={[300, 500, 700]} sizes="(min-width:768px) 30vw, 45vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
+            <Picture src={salon[name]} formats={fmt} fallbackFormat="webp" alt={`${t.gallery.title} ${i + 1}`} widths={[300, 500, 700]} sizes="(min-width:768px) 30vw, 45vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
           </a>
         ))}
       </div>
@@ -241,34 +245,18 @@ const fmt = ['avif', 'webp'] as const;
         </div>
       </div>
 
-      <!-- Contact form (see note in README to connect it to a free form service) -->
-      <form
-        action="https://formspree.io/f/your-form-id"
-        method="POST"
-        class="reveal rounded-2xl bg-charcoal ring-1 ring-white/8 p-8 space-y-5"
-      >
-        <div class="grid sm:grid-cols-2 gap-5">
-          <label class="block">
-            <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.name}</span>
-            <input name="name" type="text" required autocomplete="name" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream placeholder-white/30 focus:border-gold focus:outline-none" />
-          </label>
-          <label class="block">
-            <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.phone}</span>
-            <input name="phone" type="tel" autocomplete="tel" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream placeholder-white/30 focus:border-gold focus:outline-none" />
-          </label>
-        </div>
-        <label class="block">
-          <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.email}</span>
-          <input name="email" type="email" required autocomplete="email" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream placeholder-white/30 focus:border-gold focus:outline-none" />
-        </label>
-        <label class="block">
-          <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.message}</span>
-          <textarea name="message" rows="4" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream placeholder-white/30 focus:border-gold focus:outline-none"></textarea>
-        </label>
-        <button type="submit" class="w-full rounded-full bg-gold px-8 py-3.5 text-sm tracking-widest uppercase text-ink transition hover:bg-gold-soft">
-          {t.booking.submit}
-        </button>
-      </form>
+      <!-- Location map -->
+      <div class="reveal rounded-2xl overflow-hidden ring-1 ring-white/8 min-h-[420px] lg:min-h-full">
+        <iframe
+          src={mapEmbed}
+          title={`${business.name} — ${address}`}
+          class="w-full h-full min-h-[420px]"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
   </section>
 
@@ -276,7 +264,7 @@ const fmt = ['avif', 'webp'] as const;
   <section class="pb-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-8">
       <div class="flex items-center justify-between mb-6 reveal">
-        <h2 class="text-2xl sm:text-3xl text-cream">{t.follow.title} <a href={business.instagram} target="_blank" rel="noopener" class="text-gold">@matrix</a></h2>
+        <h2 class="text-2xl sm:text-3xl text-cream">{t.follow.title} <a href={business.instagram} target="_blank" rel="noopener" class="text-gold">{business.instagramHandle}</a></h2>
         <a href={business.instagram} target="_blank" rel="noopener" class="rounded-full border border-cream/25 px-6 py-2.5 text-xs tracking-widest uppercase text-cream hover:border-gold hover:text-gold">{t.follow.cta}</a>
       </div>
       <div class="grid grid-cols-3 sm:grid-cols-5 gap-3 reveal">

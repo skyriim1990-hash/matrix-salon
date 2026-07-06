@@ -10,6 +10,9 @@ const t = ui[lang];
 const address = lang === 'bg' ? business.addressBg : business.addressEn;
 const tel = business.phone.replace(/[^+\d]/g, '');
 const bookExternal = Boolean(business.bookingUrl && business.bookingUrl.length > 0);
+
+// Keyless Google Maps embed centred on the salon address.
+const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent('бул. Втори Юни 19, Враца')}&z=16&hl=${lang}&output=embed`;
 ---
 
 <Layout lang={lang} title={`${t.nav.contact} — ${business.name}`} description={t.meta.description}>
@@ -47,33 +50,17 @@ const bookExternal = Boolean(business.bookingUrl && business.bookingUrl.length >
           )}
         </div>
 
-        <form
-          action="https://formspree.io/f/your-form-id"
-          method="POST"
-          class="reveal rounded-2xl bg-charcoal ring-1 ring-white/8 p-8 space-y-5"
-        >
-          <div class="grid sm:grid-cols-2 gap-5">
-            <label class="block">
-              <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.name}</span>
-              <input name="name" type="text" required autocomplete="name" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream focus:border-gold focus:outline-none" />
-            </label>
-            <label class="block">
-              <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.phone}</span>
-              <input name="phone" type="tel" autocomplete="tel" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream focus:border-gold focus:outline-none" />
-            </label>
-          </div>
-          <label class="block">
-            <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.email}</span>
-            <input name="email" type="email" required autocomplete="email" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream focus:border-gold focus:outline-none" />
-          </label>
-          <label class="block">
-            <span class="text-xs tracking-widest uppercase text-sand/70">{t.booking.message}</span>
-            <textarea name="message" rows="5" class="mt-2 w-full rounded-lg bg-ink/60 border border-white/10 px-4 py-3 text-cream focus:border-gold focus:outline-none"></textarea>
-          </label>
-          <button type="submit" class="w-full rounded-full bg-gold px-8 py-3.5 text-sm tracking-widest uppercase text-ink transition hover:bg-gold-soft">
-            {t.booking.submit}
-          </button>
-        </form>
+        <div class="reveal rounded-2xl overflow-hidden ring-1 ring-white/8 min-h-[420px] lg:min-h-full">
+          <iframe
+            src={mapEmbed}
+            title={`${business.name} — ${address}`}
+            class="w-full h-full min-h-[420px]"
+            style="border:0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
       </div>
     </div>
   </section>

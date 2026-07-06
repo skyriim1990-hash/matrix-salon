@@ -22,14 +22,34 @@ const bookAttrs = bookExternal ? { target: '_blank', rel: 'noopener' } : {};
         <p class="mt-5 text-sand/75">{t.offerings.text}</p>
       </div>
 
-      <div class="mt-16 grid gap-x-14 gap-y-10 md:grid-cols-2 reveal">
-        {t.offerings.services.map((s) => (
-          <div class="group border-b border-white/8 pb-6">
-            <div class="flex items-baseline justify-between gap-4">
-              <h2 class="text-2xl sm:text-3xl text-cream group-hover:text-gold-soft transition-colors">{s.name}</h2>
-              <span class="whitespace-nowrap text-xl text-gold tabular-nums">{s.price}</span>
+      <div class="mt-16 max-w-3xl mx-auto space-y-16">
+        {t.offerings.menu.map((cat) => (
+          <div class="reveal">
+            <h2 class="text-3xl sm:text-4xl text-cream text-center">{cat.title}</h2>
+            <div class="mt-10 space-y-9">
+              {cat.groups.map((g) => (
+                <div>
+                  {g.title && (
+                    <p class="eyebrow border-b border-gold/25 pb-3">{g.title}</p>
+                  )}
+                  <ul class="divide-y divide-white/8">
+                    {g.items.map((item) => (
+                      <li class="py-5 flex items-start justify-between gap-6">
+                        <div class="min-w-0">
+                          <h3 class="text-lg sm:text-xl text-cream">{item.name}</h3>
+                          {item.time && <p class="mt-1 text-[0.7rem] uppercase tracking-wider text-sand/45">{item.time}</p>}
+                          {item.desc && <p class="mt-2 text-sm leading-relaxed text-sand/60">{item.desc}</p>}
+                        </div>
+                        <div class="text-right shrink-0">
+                          <div class="text-xl sm:text-2xl text-gold tabular-nums leading-none">{item.eur}</div>
+                          <div class="mt-1 text-xs text-sand/55 tabular-nums">{item.bgn}</div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-            <p class="mt-3 text-sm leading-relaxed text-sand/65">{s.desc}</p>
           </div>
         ))}
       </div>
