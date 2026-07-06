@@ -146,7 +146,7 @@ const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent('бул. В
       <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 reveal">
         {looks.map((name, i) => (
           <a href={localize('/gallery', lang)} class="zoom-img block aspect-square rounded-xl">
-            <Picture src={salon[name]} formats={fmt} fallbackFormat="webp" alt={`${t.gallery.title} ${i + 1}`} widths={[300, 500, 700]} sizes="(min-width:768px) 30vw, 45vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
+            <Picture src={salon[name]} formats={fmt} fallbackFormat="webp" alt={`${t.gallery.title} ${i + 1}`} widths={[400, 700, 1000]} sizes="(min-width:768px) 30vw, 45vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
           </a>
         ))}
       </div>
@@ -170,7 +170,7 @@ const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent('бул. В
       </div>
       <div class="grid gap-4 reveal">
         <div class="zoom-img rounded-2xl">
-          <Picture src={salon['feature-2']} formats={fmt} fallbackFormat="webp" alt="" widths={[400, 700]} sizes="(min-width:768px) 30vw, 92vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
+          <Picture src={salon['feature-2']} formats={fmt} fallbackFormat="webp" alt="" widths={[400, 700, 1000]} sizes="(min-width:768px) 30vw, 92vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
         </div>
       </div>
     </div>
@@ -259,7 +259,7 @@ const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent('бул. В
       <div class="grid grid-cols-3 sm:grid-cols-5 gap-3 reveal">
         {[1,2,3,4,5].map((n) => (
           <a href={business.instagram} target="_blank" rel="noopener" class="zoom-img block aspect-square rounded-lg">
-            <Picture src={salon[`insta-${n}`]} formats={fmt} fallbackFormat="webp" alt={`Instagram ${n}`} widths={[200, 400]} sizes="(min-width:640px) 20vw, 33vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
+            <Picture src={salon[`insta-${n}`]} formats={fmt} fallbackFormat="webp" alt={`Instagram ${n}`} widths={[300, 500]} sizes="(min-width:640px) 20vw, 33vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
           </a>
         ))}
       </div>
