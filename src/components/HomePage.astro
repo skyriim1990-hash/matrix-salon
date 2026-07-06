@@ -21,8 +21,8 @@ const tel = business.phone.replace(/[^+\d]/g, '');
 const looks = ['look-1', 'look-3', 'look-5', 'look-8', 'look-10', 'look-13'];
 const fmt = ['avif', 'webp'] as const;
 
-// Keyless Google Maps embed: labelled pin ("Matrix") at the exact salon location.
-const mapEmbed = `https://www.google.com/maps?q=43.2003657,23.5519078(Matrix)&z=17&hl=${lang}&output=embed`;
+// Keyless Google Maps embed — query by business name so the place card + name show.
+const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent('Matrix, бул. Втори Юни 19, Враца')}&z=17&hl=${lang}&output=embed`;
 ---
 
 <Layout lang={lang}>
