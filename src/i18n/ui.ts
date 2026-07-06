@@ -12,7 +12,7 @@ export const defaultLang: Lang = 'bg';
 // Business details shared across languages
 export const business = {
   name: 'Matrix',
-  logo: '/images/logo.png',
+  logo: '/images/logo.svg',
   phone: '+359 88 000 0000',
   email: 'studio@matrix-vratsa.bg',
   addressBg: 'гр. Враца, ул. „Примерна“ 12',

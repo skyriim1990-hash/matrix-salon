@@ -1,5 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import { salon } from '../lib/salonImages';
 import { ui, business, localize, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -15,16 +17,23 @@ const address = lang === 'bg' ? business.addressBg : business.addressEn;
 const tel = business.phone.replace(/[^+\d]/g, '');
 
 const work = [1, 2, 3, 4, 5, 6];
+const fmt = ['avif', 'webp'] as const;
 ---
 
 <Layout lang={lang}>
   <!-- ===== HERO ===== -->
   <section class="relative isolate min-h-dvh flex items-center overflow-hidden">
-    <img
-      src="/images/ph/hero.svg"
+    <Picture
+      src={salon['hero']}
+      formats={fmt}
+      fallbackFormat="webp"
       alt=""
-      class="absolute inset-0 -z-20 h-full w-full object-cover"
+      widths={[600, 1000, 1440]}
+      sizes="100vw"
+      loading="eager"
       fetchpriority="high"
+      pictureAttributes={{ class: 'absolute inset-0 -z-20 block h-full w-full' }}
+      class="absolute inset-0 h-full w-full object-cover"
     />
     <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink/70 via-ink/55 to-ink"></div>
 
@@ -57,10 +66,10 @@ const work = [1, 2, 3, 4, 5, 6];
     <div class="max-w-7xl mx-auto px-4 sm:px-8 grid gap-12 lg:grid-cols-2 items-center">
       <div class="grid grid-cols-2 gap-4 reveal">
         <div class="zoom-img rounded-2xl mt-10">
-          <img src="/images/ph/invite-1.svg" alt="" loading="lazy" width="820" height="1040" class="w-full h-full object-cover" />
+          <Picture src={salon['invite-1']} formats={fmt} fallbackFormat="webp" alt="" widths={[400, 700, 1100]} sizes="(min-width:1024px) 22vw, 45vw" loading="lazy" pictureAttributes={{ class: 'block h-full' }} class="w-full h-full object-cover" />
         </div>
         <div class="zoom-img rounded-2xl">
-          <img src="/images/ph/invite-2.svg" alt="" loading="lazy" width="820" height="1040" class="w-full h-full object-cover" />
+          <Picture src={salon['invite-2']} formats={fmt} fallbackFormat="webp" alt="" widths={[400, 700, 1100]} sizes="(min-width:1024px) 22vw, 45vw" loading="lazy" pictureAttributes={{ class: 'block h-full' }} class="w-full h-full object-cover" />
         </div>
       </div>
       <div class="reveal">
@@ -112,7 +121,7 @@ const work = [1, 2, 3, 4, 5, 6];
   <section class="py-24 sm:py-32">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 grid gap-14 lg:grid-cols-2 items-center">
       <div class="zoom-img rounded-2xl reveal">
-        <img src="/images/ph/about.svg" alt="" loading="lazy" width="1000" height="1240" class="w-full object-cover" />
+        <Picture src={salon['about']} formats={fmt} fallbackFormat="webp" alt="" widths={[500, 800, 1100]} sizes="(min-width:1024px) 45vw, 92vw" loading="lazy" pictureAttributes={{ class: 'block' }} class="w-full object-cover" />
       </div>
       <div class="reveal">
         <p class="eyebrow">{t.about.eyebrow}</p>
@@ -143,7 +152,7 @@ const work = [1, 2, 3, 4, 5, 6];
       <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 reveal">
         {work.map((n) => (
           <a href={localize('/gallery', lang)} class="zoom-img block aspect-square rounded-xl">
-            <img src={`/images/ph/work-${n}.svg`} alt={`${t.gallery.title} ${n}`} loading="lazy" width="900" height="900" class="w-full h-full object-cover" />
+            <Picture src={salon[`work-${n}`]} formats={fmt} fallbackFormat="webp" alt={`${t.gallery.title} ${n}`} widths={[300, 500, 700]} sizes="(min-width:768px) 30vw, 45vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
           </a>
         ))}
       </div>
@@ -160,13 +169,15 @@ const work = [1, 2, 3, 4, 5, 6];
   <section class="py-24 sm:py-32">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 grid gap-4 md:grid-cols-3">
       <div class="md:col-span-2 relative zoom-img rounded-2xl reveal">
-        <img src="/images/ph/feature-5.svg" alt="" loading="lazy" width="1440" height="640" class="w-full h-full object-cover" />
+        <Picture src={salon['feature-5']} formats={fmt} fallbackFormat="webp" alt="" widths={[600, 1000, 1440]} sizes="(min-width:768px) 62vw, 92vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
         <div class="absolute inset-0 bg-ink/45 flex items-center justify-center text-center p-8">
           <p class="font-display italic text-3xl sm:text-4xl text-cream max-w-lg">“{t.feature.quote}”<span class="block mt-4 text-base not-italic tracking-widest uppercase text-gold font-body">{t.feature.signature}</span></p>
         </div>
       </div>
       <div class="grid gap-4 reveal">
-        <div class="zoom-img rounded-2xl"><img src="/images/ph/feature-2.svg" alt="" loading="lazy" width="720" height="940" class="w-full h-full object-cover" /></div>
+        <div class="zoom-img rounded-2xl">
+          <Picture src={salon['feature-2']} formats={fmt} fallbackFormat="webp" alt="" widths={[400, 700]} sizes="(min-width:768px) 30vw, 92vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
+        </div>
       </div>
     </div>
   </section>
@@ -271,7 +282,7 @@ const work = [1, 2, 3, 4, 5, 6];
       <div class="grid grid-cols-3 sm:grid-cols-5 gap-3 reveal">
         {[1,2,3,4,5].map((n) => (
           <a href={business.instagram} target="_blank" rel="noopener" class="zoom-img block aspect-square rounded-lg">
-            <img src={`/images/ph/insta-${n}.svg`} alt={`Instagram ${n}`} loading="lazy" width="640" height="640" class="w-full h-full object-cover" />
+            <Picture src={salon[`insta-${n}`]} formats={fmt} fallbackFormat="webp" alt={`Instagram ${n}`} widths={[200, 400]} sizes="(min-width:640px) 20vw, 33vw" loading="lazy" pictureAttributes={{ class: 'block h-full w-full' }} class="w-full h-full object-cover" />
           </a>
         ))}
       </div>

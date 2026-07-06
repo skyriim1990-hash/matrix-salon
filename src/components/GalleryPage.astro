@@ -1,5 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import { salon } from '../lib/salonImages';
 import { ui, business, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -8,11 +10,12 @@ interface Props {
 const { lang } = Astro.props;
 const t = ui[lang];
 
-// Masonry-style mix using the placeholder set (replace with real photos later).
+// Masonry-style mix of real salon photos (12 distinct shots).
 const shots = [
-  'work-1', 'work-2', 'feature-2', 'work-3', 'work-4', 'feature-4',
-  'work-5', 'work-6', 'work-7', 'invite-1', 'work-8', 'invite-2',
+  'work-1', 'work-2', 'work-3', 'work-4', 'work-5', 'work-6',
+  'work-7', 'work-8', 'invite-1', 'invite-2', 'about', 'feature-5',
 ];
+const fmt = ['avif', 'webp'] as const;
 ---
 
 <Layout lang={lang} title={`${t.nav.gallery} — ${business.name}`} description={t.meta.description}>
@@ -28,7 +31,17 @@ const shots = [
       <div class="mt-14 columns-2 md:columns-3 gap-4 [&>*]:mb-4 reveal">
         {shots.map((name, i) => (
           <div class="zoom-img rounded-xl break-inside-avoid">
-            <img src={`/images/ph/${name}.svg`} alt={`${t.gallery.title} ${i + 1}`} loading="lazy" class="w-full object-cover" />
+            <Picture
+              src={salon[name]}
+              formats={fmt}
+              fallbackFormat="webp"
+              alt={`${t.gallery.title} ${i + 1}`}
+              widths={[300, 500, 700]}
+              sizes="(min-width:768px) 33vw, 50vw"
+              loading="lazy"
+              pictureAttributes={{ class: 'block' }}
+              class="w-full object-cover"
+            />
           </div>
         ))}
       </div>
