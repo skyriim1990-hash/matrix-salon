@@ -9,13 +9,23 @@ interface Props {
 }
 const { lang } = Astro.props;
 const t = ui[lang];
-
-// Hair-only gallery: real client results.
-const shots = [
-  'look-1', 'look-2', 'look-3', 'look-4', 'look-5', 'look-6', 'look-7',
-  'look-8', 'look-9', 'look-10', 'look-11', 'look-12', 'look-13',
-];
 const fmt = ['avif', 'webp'] as const;
+
+// Filter tabs (bilingual)
+const cats = [
+  { id: 'hair', bg: 'Коса', en: 'Hair' },
+  { id: 'headspa', bg: 'Head spa', en: 'Head spa' },
+  { id: 'makeup', bg: 'Грим', en: 'Makeup' },
+  { id: 'nails', bg: 'Маникюр и педикюр', en: 'Manicure & Pedicure' },
+];
+
+// Each photo with its category. Add new photos here as they come in.
+const items = [
+  ...Array.from({ length: 13 }, (_, i) => ({ name: `look-${i + 1}`, cat: 'hair' })),
+  ...Array.from({ length: 6 }, (_, i) => ({ name: `headspa-${i + 1}`, cat: 'headspa' })),
+  ...Array.from({ length: 4 }, (_, i) => ({ name: `makeup-${i + 1}`, cat: 'makeup' })),
+  ...Array.from({ length: 9 }, (_, i) => ({ name: `nails-${i + 1}`, cat: 'nails' })),
+].filter((it) => salon[it.name]);
 ---
 
 <Layout lang={lang} title={`${t.nav.gallery} — ${business.name}`} description={t.meta.description}>
@@ -28,11 +38,26 @@ const fmt = ['avif', 'webp'] as const;
         <p class="mt-5 text-sand/75">{t.gallery.text}</p>
       </div>
 
-      <div class="mt-14 columns-2 md:columns-3 gap-4 [&>*]:mb-4 reveal">
-        {shots.map((name, i) => (
-          <div class="zoom-img rounded-xl break-inside-avoid">
+      <!-- Category filter tabs -->
+      <div id="gallery-tabs" class="mt-10 flex flex-wrap justify-center gap-2.5 reveal">
+        {cats.map((c, i) => (
+          <button
+            type="button"
+            data-filter={c.id}
+            class={`gtab rounded-full border px-5 py-2 text-xs tracking-widest uppercase transition-colors ${
+              i === 0 ? 'border-gold bg-gold text-ink' : 'border-cream/25 text-cream/75 hover:border-gold hover:text-gold'
+            }`}
+          >
+            {lang === 'bg' ? c.bg : c.en}
+          </button>
+        ))}
+      </div>
+
+      <div id="gallery-grid" class="mt-12 columns-2 md:columns-3 gap-4 [&>*]:mb-4 reveal">
+        {items.map((it, i) => (
+          <div class="gitem zoom-img rounded-xl break-inside-avoid" data-cat={it.cat}>
             <Picture
-              src={salon[name]}
+              src={salon[it.name]}
               formats={fmt}
               fallbackFormat="webp"
               alt={`${t.gallery.title} ${i + 1}`}
@@ -47,4 +72,24 @@ const fmt = ['avif', 'webp'] as const;
       </div>
     </div>
   </section>
+
+  <script>
+    const tabs = document.querySelectorAll('#gallery-tabs .gtab');
+    const items = document.querySelectorAll('#gallery-grid .gitem');
+    const on = ['border-gold', 'bg-gold', 'text-ink'];
+    const off = ['border-cream/25', 'text-cream/75', 'hover:border-gold', 'hover:text-gold'];
+
+    tabs.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        tabs.forEach((b) => { b.classList.add(...off); b.classList.remove(...on); });
+        btn.classList.add(...on); btn.classList.remove(...off);
+        const f = btn.getAttribute('data-filter');
+        items.forEach((it) => {
+          const show = it.getAttribute('data-cat') === f;
+          (it as HTMLElement).style.display = show ? '' : 'none';
+        });
+      });
+    });
+    if (tabs[0]) (tabs[0] as HTMLElement).click();
+  </script>
 </Layout>

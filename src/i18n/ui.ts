@@ -147,6 +147,23 @@ export const ui: Record<Lang, Dict> = {
             ]},
           ],
         },
+        {
+          title: 'Маникюр и педикюр',
+          groups: [
+            { title: 'Маникюр', items: [
+              { name: 'Едноцветен маникюр / маникюр със семпла декорация', eur: '28 €', bgn: '54,79 лв.' },
+              { name: 'Френски маникюр / омбре / маникюр с повече от две декорации', eur: '30 €', bgn: '58,50 лв.' },
+            ]},
+            { title: 'Педикюр', items: [
+              { name: 'Педикюр', eur: '25 €', bgn: '48,75 лв.' },
+              { name: 'Спа педикюр', eur: '35 €', bgn: '68,25 лв.' },
+            ]},
+            { title: 'Изграждане', items: [
+              { name: 'Цялостно изграждане', eur: '45 €', bgn: '87,75 лв.' },
+              { name: 'Изграждане на 1 нокът', eur: '4 €', bgn: '7,80 лв.' },
+            ]},
+          ],
+        },
       ],
     },
     about: {
@@ -306,6 +323,23 @@ export const ui: Record<Lang, Dict> = {
               { name: 'Bridal makeup trial', desc: 'Together with the artist you try several looks to perfect the details and be sure your bridal makeup lasts all day.', time: '120m', eur: '35 €', bgn: '68.45 lv.' },
               { name: 'Makeup trial', desc: 'See how your chosen look suits you and whether it meets your expectations.', time: '90m', eur: '35 €', bgn: '68.45 lv.' },
               { name: "Makeup at the client's location", desc: 'Travel costs are added on top of the makeup price.', time: '120 – 180m', eur: '75 €', bgn: '146.69 lv.' },
+            ]},
+          ],
+        },
+        {
+          title: 'Manicure & Pedicure',
+          groups: [
+            { title: 'Manicure', items: [
+              { name: 'Single-colour manicure / manicure with simple decoration', eur: '28 €', bgn: '54.79 lv.' },
+              { name: 'French / ombré / manicure with more than two decorations', eur: '30 €', bgn: '58.50 lv.' },
+            ]},
+            { title: 'Pedicure', items: [
+              { name: 'Pedicure', eur: '25 €', bgn: '48.75 lv.' },
+              { name: 'Spa pedicure', eur: '35 €', bgn: '68.25 lv.' },
+            ]},
+            { title: 'Nail building', items: [
+              { name: 'Full nail build', eur: '45 €', bgn: '87.75 lv.' },
+              { name: 'Building of 1 nail', eur: '4 €', bgn: '7.80 lv.' },
             ]},
           ],
         },

@@ -9,6 +9,8 @@ interface Props {
 }
 const { lang } = Astro.props;
 const t = ui[lang];
+
+const menu = t.offerings.menu;
 ---
 
 <Layout lang={lang} title={`${t.nav.services} — ${business.name}`} description={t.meta.description}>
@@ -21,14 +23,14 @@ const t = ui[lang];
         <p class="mt-5 text-sand/75">{t.offerings.text}</p>
       </div>
 
+      <!-- Left: Women + Manicure/Pedicure · Right: Men, Children, Head spa, Cosmetic -->
       <div class="mt-16 grid gap-x-16 gap-y-16 lg:grid-cols-2 items-start">
-        <!-- Left: women's -->
-        <div class="reveal">
-          <CategoryMenu cat={t.offerings.menu[0]} />
-        </div>
-        <!-- Right: men's, then children's -->
         <div class="reveal space-y-14">
-          {t.offerings.menu.slice(1).map((cat) => (
+          <CategoryMenu cat={menu[0]} />
+          <CategoryMenu cat={menu[menu.length - 1]} />
+        </div>
+        <div class="reveal space-y-14">
+          {menu.slice(1, menu.length - 1).map((cat) => (
             <CategoryMenu cat={cat} />
           ))}
         </div>
