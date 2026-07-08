@@ -53,7 +53,7 @@ export const ui: Record<Lang, Dict> = {
   bg: {
     nav: { home: 'Начало', services: 'Услуги', gallery: 'Галерия', contact: 'Контакти', book: 'Запази час' },
     hero: {
-      eyebrow: 'Салон за коса · Враца',
+      eyebrow: 'Салон за красота Матрикс',
       titleTop: 'Изкуството',
       titleBottom: 'на красивата коса',
       text: 'Прецизни подстригвания, изящно боядисване и стилизиране, създадени специално за вас — в сърцето на Враца.',
@@ -201,7 +201,7 @@ export const ui: Record<Lang, Dict> = {
   en: {
     nav: { home: 'Home', services: 'Services', gallery: 'Gallery', contact: 'Contact', book: 'Book now' },
     hero: {
-      eyebrow: 'Hair Studio · Vratsa',
+      eyebrow: 'Beauty Salon Matrix',
       titleTop: 'The art of',
       titleBottom: 'beautiful hair',
       text: 'Precise cuts, refined colour and styling crafted just for you — in the heart of Vratsa.',
