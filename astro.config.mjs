@@ -1,11 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
-// Update `site` to your real domain once you have one (helps SEO + sitemaps).
-// On Vercel you'll get a free URL like https://your-site.vercel.app to start.
+// `site` is the live URL — used for canonical links, sitemap and Open Graph.
+// Update it if you move to a custom domain.
 export default defineConfig({
-  site: 'https://your-site.vercel.app',
+  site: 'https://matrix-salon-three.vercel.app',
   // Bilingual: Bulgarian is the default (served at /), English at /en/.
   i18n: {
     locales: ['bg', 'en'],
@@ -14,6 +15,14 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'bg',
+        locales: { bg: 'bg-BG', en: 'en-GB' },
+      },
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

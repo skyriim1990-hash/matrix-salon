@@ -2,7 +2,8 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { ui, type Lang } from '../i18n/ui';
+import CookieConsent from '../components/CookieConsent.astro';
+import { ui, business, localize, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -14,6 +15,40 @@ const { lang, title, description } = Astro.props;
 const t = ui[lang];
 const pageTitle = title ?? t.meta.title;
 const pageDesc = description ?? t.meta.description;
+
+// Canonical + hreflang (same page in both languages)
+const raw = Astro.url.pathname.replace(/\/$/, '') || '/';
+const logical = raw.replace(/^\/en/, '') || '/';
+const bgHref = new URL(localize(logical, 'bg'), Astro.site).href;
+const enHref = new URL(localize(logical, 'en'), Astro.site).href;
+const canonical = lang === 'bg' ? bgHref : enHref;
+const ogImage = new URL('/og.jpg', Astro.site).href;
+const telIntl = '+359' + business.phone.replace(/[^\d]/g, '').replace(/^0/, '');
+
+// LocalBusiness structured data (helps Google local search)
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HairSalon',
+  name: business.name,
+  image: ogImage,
+  url: bgHref,
+  telephone: telIntl,
+  email: business.email,
+  priceRange: '€€',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'бул. Втори Юни 19',
+    addressLocality: 'Враца',
+    addressCountry: 'BG',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 43.2003657, longitude: 23.5519078 },
+  hasMap: business.mapsUrl,
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '10:00', closes: '19:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '10:00', closes: '17:00' },
+  ],
+  sameAs: [business.instagram, business.facebook],
+};
 ---
 
 <!doctype html>
@@ -24,10 +59,24 @@ const pageDesc = description ?? t.meta.description;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="bg" href={bgHref} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="x-default" href={bgHref} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'bg' ? 'bg_BG' : 'en_GB'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="theme-color" content="#100e0c" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -41,6 +90,7 @@ const pageDesc = description ?? t.meta.description;
       <slot />
     </main>
     <Footer lang={lang} />
+    <CookieConsent lang={lang} />
 
     <script>
       // Reveal-on-scroll (respects reduced-motion via CSS).

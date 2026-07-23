@@ -1,0 +1,70 @@
+---
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const c = {
+  bg: {
+    text: 'Използваме бисквитки за вградената Google карта и за по-добро изживяване.',
+    accept: 'Приемам',
+    reject: 'Отказвам',
+  },
+  en: {
+    text: 'We use cookies for the embedded Google map and a better experience.',
+    accept: 'Accept',
+    reject: 'Reject',
+  },
+}[lang];
+---
+
+<div
+  id="cookie-banner"
+  style="display:none"
+  class="fixed inset-x-0 bottom-0 z-[100] border-t border-charcoal-2 bg-ink/95 backdrop-blur"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-sand/80">{c.text}</p>
+    <div class="flex gap-3 shrink-0">
+      <button id="cookie-reject" type="button" class="rounded-full border border-cream/25 px-6 py-2 text-xs tracking-widest uppercase text-cream/80 transition hover:border-gold hover:text-gold">
+        {c.reject}
+      </button>
+      <button id="cookie-accept" type="button" class="rounded-full bg-gold px-6 py-2 text-xs tracking-widest uppercase text-ink transition hover:bg-gold-soft">
+        {c.accept}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const KEY = 'cookie-consent';
+
+  function loadMaps() {
+    document.querySelectorAll('iframe.cookie-map').forEach((f) => {
+      const el = f as HTMLIFrameElement;
+      if (!el.getAttribute('src') && el.dataset.src) el.setAttribute('src', el.dataset.src);
+    });
+    document.querySelectorAll('.cookie-map-ph').forEach((p) => {
+      (p as HTMLElement).style.display = 'none';
+    });
+  }
+
+  const banner = document.getElementById('cookie-banner');
+  const choice = localStorage.getItem(KEY);
+  if (choice === 'accepted') loadMaps();
+  if (!choice && banner) banner.style.display = '';
+
+  function decide(v: string) {
+    localStorage.setItem(KEY, v);
+    if (banner) banner.style.display = 'none';
+    if (v === 'accepted') loadMaps();
+  }
+
+  document.getElementById('cookie-accept')?.addEventListener('click', () => decide('accepted'));
+  document.getElementById('cookie-reject')?.addEventListener('click', () => decide('rejected'));
+  document.querySelectorAll('[data-accept-cookies]').forEach((b) =>
+    b.addEventListener('click', () => decide('accepted')),
+  );
+</script>
