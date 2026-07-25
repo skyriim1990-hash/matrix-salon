@@ -24,6 +24,11 @@ export const business = {
   facebook: 'https://www.facebook.com/share/1DJCBgCAnZ/',
   notinoIos: 'https://apps.apple.com/gb/app/notino-perfumes-and-cosmetics/id1261812151',
   notinoAndroid: 'https://play.google.com/store/apps/details?id=com.pragonauts.notino&hl=bg',
+  team: [
+    { name: 'Лили', roleBg: 'Фризьор', roleEn: 'Hairdresser', phone: '0877 576 786', email: 'liliqgeorgieva19@gmail.com' },
+    { name: 'Стела', roleBg: 'Head spa и грим', roleEn: 'Head spa & makeup', phone: '0878 612 000', email: 'stheadspa@gmail.com' },
+    { name: 'Филипа', roleBg: 'Маникюр и педикюр', roleEn: 'Manicure & pedicure', phone: '0876 767 322', email: 'Aalicee@gmail.com' },
+  ],
 };
 
 type Price = { name: string; desc?: string; time?: string; eur: string; bgn: string };

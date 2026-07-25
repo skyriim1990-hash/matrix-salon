@@ -8,7 +8,6 @@ interface Props {
 const { lang } = Astro.props;
 const t = ui[lang];
 const address = lang === 'bg' ? business.addressBg : business.addressEn;
-const tel = business.phone.replace(/[^+\d]/g, '');
 const bookExternal = Boolean(business.bookingUrl && business.bookingUrl.length > 0);
 
 // Keyless Google Maps embed — query by business name so the place card + name show.
@@ -33,10 +32,24 @@ const mapPh = lang === 'bg'
           <div>
             <h2 class="text-gold text-sm tracking-widest uppercase mb-3">{t.booking.findUs}</h2>
             <a href={business.mapsUrl} target="_blank" rel="noopener" class="text-lg text-cream/90 hover:text-gold">{address}</a>
-            <div class="mt-2 space-y-1 text-sand/80">
-              <a href={`tel:${tel}`} class="block hover:text-gold">{business.phone}</a>
-              <a href={`mailto:${business.email}`} class="block hover:text-gold">{business.email}</a>
-            </div>
+          </div>
+
+          <div>
+            <h2 class="text-gold text-sm tracking-widest uppercase mb-4">{lang === 'bg' ? 'Екип' : 'Team'}</h2>
+            <ul class="divide-y divide-white/8">
+              {business.team.map((m) => (
+                <li class="py-4 flex items-start justify-between gap-6">
+                  <div class="min-w-0">
+                    <p class="text-lg text-cream">{m.name}</p>
+                    <p class="mt-0.5 text-[0.7rem] tracking-widest uppercase text-gold">{lang === 'bg' ? m.roleBg : m.roleEn}</p>
+                  </div>
+                  <div class="text-right text-sm leading-relaxed shrink-0">
+                    <a href={`tel:${m.phone.replace(/[^+\d]/g, '')}`} class="block text-cream/85 hover:text-gold tabular-nums">{m.phone}</a>
+                    <a href={`mailto:${m.email}`} class="block text-xs text-sand/60 hover:text-gold break-all">{m.email}</a>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
           <div>
             <h2 class="text-gold text-sm tracking-widest uppercase mb-3">{t.booking.hoursTitle}</h2>
