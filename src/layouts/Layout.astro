@@ -92,6 +92,10 @@ const jsonLd = {
     <Footer lang={lang} />
     <CookieConsent lang={lang} />
 
+    <button id="to-top" aria-label="Top" class="grid place-items-center h-11 w-11 rounded-full bg-gold text-ink shadow-lg transition-colors hover:bg-gold-soft">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+    </button>
+
     <script>
       // Reveal-on-scroll (respects reduced-motion via CSS).
       const els = document.querySelectorAll('.reveal');
@@ -110,6 +114,14 @@ const jsonLd = {
         els.forEach((el) => io.observe(el));
       } else {
         els.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      const toTop = document.getElementById('to-top');
+      if (toTop) {
+        toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        const onScroll = () => toTop.classList.toggle('show', window.scrollY > 500);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
       }
     </script>
   </body>
