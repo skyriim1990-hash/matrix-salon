@@ -61,7 +61,7 @@ export const ui: Record<Lang, Dict> = {
       eyebrow: 'Салон за красота Матрикс',
       titleTop: 'Изкуството',
       titleBottom: 'на красивата коса',
-      text: 'Прецизни подстригвания, изящно боядисване и стилизиране, създадени специално за вас — в сърцето на Враца.',
+      text: 'Прецизни подстригвания, изящно боядисване и стилизиране, създадени специално за вас, в сърцето на Враца.',
       ctaPrimary: 'Запазете час',
       ctaSecondary: 'Вижте услугите',
     },
@@ -144,7 +144,7 @@ export const ui: Record<Lang, Dict> = {
             { title: 'Грим', items: [
               { name: 'Ежедневен грим', time: '90 мин', eur: '35 €', bgn: '68,45 лв.' },
               { name: 'Сватбен грим', desc: 'Грим, който подчертава красотата на булката и ѝ придава перфектен вид в сватбения ден.', time: '120 мин', eur: '60 €', bgn: '117,35 лв.' },
-              { name: 'Абитуриентски грим', desc: 'Дълготраен вечерен грим, съобразен с празничния повод — по-изразителен и издържащ през цялата вечер.', time: '90 – 120 мин', eur: '55 – 65 €', bgn: '107,57 – 127,13 лв.' },
+              { name: 'Абитуриентски грим', desc: 'Дълготраен вечерен грим, съобразен с празничния повод, по-изразителен и издържащ през цялата вечер.', time: '90 – 120 мин', eur: '55 – 65 €', bgn: '107,57 – 127,13 лв.' },
               { name: 'Вечерен грим', desc: 'По-изразителен грим, подходящ за балове или други публични събития.', time: '90 – 120 мин', eur: '39 – 48 €', bgn: '76,28 – 93,88 лв.' },
               { name: 'Пробен сватбен грим', desc: 'Заедно с гримьорката пробвате няколко варианта, за да изпипате детайлите и да сте сигурни, че сватбеният грим ще издържи през целия ден.', time: '120 мин', eur: '35 €', bgn: '68,45 лв.' },
               { name: 'Пробен грим', desc: 'Ще видите как ви стои избраната визия и дали отговаря на очакванията ви.', time: '90 мин', eur: '35 €', bgn: '68,45 лв.' },
@@ -174,7 +174,7 @@ export const ui: Record<Lang, Dict> = {
     about: {
       eyebrow: 'Най-доброто студио',
       title: 'Ще преобразим визията ви',
-      text: 'Нашият талантлив екип е винаги готов да сподели своята страст — не пропускайте възможността.',
+      text: 'Нашият талантлив екип е винаги готов да сподели своята страст. Не пропускайте възможността.',
       years: '12',
       yearsLabel: 'Години опит',
       clients: '4К+',
@@ -189,7 +189,7 @@ export const ui: Record<Lang, Dict> = {
     booking: {
       eyebrow: 'Резервация',
       title: 'Запазете своя час',
-      text: 'Обадете се или ни пишете — ще намерим час, който ви е удобен.',
+      text: 'Обадете се или ни пишете и ще намерим час, който ви е удобен.',
       name: 'Име',
       email: 'Имейл',
       phone: 'Телефон',
@@ -217,7 +217,7 @@ export const ui: Record<Lang, Dict> = {
     follow: { title: 'Последвайте ни', cta: 'Последвай' },
     notino: { eyebrow: 'Резервация', title: 'За запазване на час посетете приложението на NOTINO', button: 'Запази час', download: 'Ако нямате приложението, свалете го оттук:', getOn: 'Свали от' },
     footer: {
-      tagline: 'Салон за коса в сърцето на Враца — модерни подстригвания, цвят и грижа.',
+      tagline: 'Салон за коса в сърцето на Враца. Модерни подстригвания, цвят и грижа.',
       hours: 'Работно време',
       nav: 'Навигация',
       contact: 'Контакти',
@@ -240,7 +240,7 @@ export const ui: Record<Lang, Dict> = {
       eyebrow: 'Beauty Salon Matrix',
       titleTop: 'The art of',
       titleBottom: 'beautiful hair',
-      text: 'Precise cuts, refined colour and styling crafted just for you — in the heart of Vratsa.',
+      text: 'Precise cuts, refined colour and styling crafted just for you, in the heart of Vratsa.',
       ctaPrimary: 'Book an appointment',
       ctaSecondary: 'View services',
     },
@@ -323,7 +323,7 @@ export const ui: Record<Lang, Dict> = {
             { title: 'Makeup', items: [
               { name: 'Everyday makeup', time: '90m', eur: '35 €', bgn: '68.45 lv.' },
               { name: 'Bridal makeup', desc: 'Makeup that highlights the bride’s beauty for a perfect look on the wedding day.', time: '120m', eur: '60 €', bgn: '117.35 lv.' },
-              { name: 'Prom makeup', desc: 'Long-lasting evening makeup for the occasion — more expressive and made to last all night.', time: '90 – 120m', eur: '55 – 65 €', bgn: '107.57 – 127.13 lv.' },
+              { name: 'Prom makeup', desc: 'Long-lasting evening makeup for the occasion, more expressive and made to last all night.', time: '90 – 120m', eur: '55 – 65 €', bgn: '107.57 – 127.13 lv.' },
               { name: 'Evening makeup', desc: 'More expressive make-up, suitable for proms or any social event.', time: '90 – 120m', eur: '39 – 48 €', bgn: '76.28 – 93.88 lv.' },
               { name: 'Bridal makeup trial', desc: 'Together with the artist you try several looks to perfect the details and be sure your bridal makeup lasts all day.', time: '120m', eur: '35 €', bgn: '68.45 lv.' },
               { name: 'Makeup trial', desc: 'See how your chosen look suits you and whether it meets your expectations.', time: '90m', eur: '35 €', bgn: '68.45 lv.' },
@@ -353,7 +353,7 @@ export const ui: Record<Lang, Dict> = {
     about: {
       eyebrow: 'The best studio',
       title: "We'll transform your look",
-      text: 'Our talented team is always ready to share their passion — don’t miss the opportunity.',
+      text: 'Our talented team is always ready to share their passion. Don’t miss the opportunity.',
       years: '12',
       yearsLabel: 'Years of experience',
       clients: '4K+',
@@ -368,7 +368,7 @@ export const ui: Record<Lang, Dict> = {
     booking: {
       eyebrow: 'Booking',
       title: 'Reserve your appointment',
-      text: 'Give us a call or send a message — we’ll find a time that works for you.',
+      text: 'Give us a call or send a message and we’ll find a time that works for you.',
       name: 'Name',
       email: 'Email',
       phone: 'Phone',
@@ -396,7 +396,7 @@ export const ui: Record<Lang, Dict> = {
     follow: { title: 'Follow us', cta: 'Follow' },
     notino: { eyebrow: 'Booking', title: 'To book an appointment, use the NOTINO app', button: 'Book now', download: "If you don't have the app, download it here:", getOn: 'Get it on' },
     footer: {
-      tagline: 'A hair salon in the heart of Vratsa — modern cuts, colour and care.',
+      tagline: 'A hair salon in the heart of Vratsa. Modern cuts, colour and care.',
       hours: 'Opening hours',
       nav: 'Navigation',
       contact: 'Contact',
