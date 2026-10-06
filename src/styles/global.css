@@ -146,3 +146,30 @@ h1, h2, h3, h4 {
   pointer-events: auto;
   transform: none;
 }
+
+/* Touch targets: on a phone every link and button is at least 40px tall. */
+@media (max-width: 47.99rem) {
+  header a[aria-label^='Switch to'],
+  footer a[aria-label='Instagram'],
+  footer a[aria-label='Facebook'] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  footer nav a,
+  footer a.tracking-widest {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  a[href^='tel:'],
+  a[href^='mailto:'],
+  footer a.block,
+  footer a[href*='maps'] {
+    padding-block: 0.55rem;
+  }
+}
