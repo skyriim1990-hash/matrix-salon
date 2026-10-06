@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://matrix-salon-three.vercel.app/sitemap-index.xml
+Sitemap: https://matrix-salon.com/sitemap-index.xml

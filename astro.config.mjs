@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // `site` is the live URL — used for canonical links, sitemap and Open Graph.
 // Update it if you move to a custom domain.
 export default defineConfig({
-  site: 'https://matrix-salon-three.vercel.app',
+  site: 'https://matrix-salon.com',
   // Bilingual: Bulgarian is the default (served at /), English at /en/.
   i18n: {
     locales: ['bg', 'en'],
